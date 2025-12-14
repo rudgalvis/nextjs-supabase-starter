@@ -10,13 +10,30 @@ import { createServerActionClient } from "@/lib/supabase/server"
  * Get the site URL from environment variable or current request origin
  */
 const getSiteUrl = async () => {
+    // Check environment variable first
     if (process.env.NEXT_PUBLIC_SITE_URL) {
         return process.env.NEXT_PUBLIC_SITE_URL
     }
 
+    // Check Vercel environment variables
+    if (process.env.VERCEL_URL) {
+        return `https://${process.env.VERCEL_URL}`
+    }
+
+    // Fall back to request headers
     const headersList = await headers()
     const host = headersList.get("host")
-    const protocol = headersList.get("x-forwarded-proto") || "http"
+
+    if (!host) {
+        // Fallback if host is not available
+        return "http://localhost:3001"
+    }
+
+    // Determine protocol
+    const protocol =
+        headersList.get("x-forwarded-proto") ||
+        headersList.get("x-forwarded-protocol") ||
+        (host.includes("localhost") ? "http" : "https")
 
     return `${protocol}://${host}`
 }
