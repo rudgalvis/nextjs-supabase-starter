@@ -16,6 +16,7 @@ const VerifyEmailContent = () => {
             const token = searchParams.get("token")
             const tokenHash = searchParams.get("token_hash")
             const type = searchParams.get("type")
+            const email = searchParams.get("email")
             const next = searchParams.get("next") ?? "/"
 
             if (!token && !tokenHash) {
@@ -53,7 +54,8 @@ const VerifyEmailContent = () => {
                     : await supabase.auth.verifyOtp({
                           token: token!,
                           type: otpType,
-                      } as any)
+                          ...(email && { email }),
+                      } as Parameters<typeof supabase.auth.verifyOtp>[0])
 
                 if (error) {
                     setStatus("error")

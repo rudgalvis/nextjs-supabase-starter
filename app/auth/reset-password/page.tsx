@@ -57,7 +57,7 @@ const ResetPasswordPage = () => {
     return (
         <div className="flex min-h-screen items-center justify-center p-4">
             <div className="border-border/50 bg-card/80 relative w-full max-w-md overflow-hidden rounded-xl border shadow-xl backdrop-blur-sm">
-                <div className="from-primary/5 to-secondary/5 absolute inset-0 bg-gradient-to-br" />
+                <div className="from-primary/5 to-secondary/5 absolute inset-0 bg-linear-to-br" />
                 <div className="relative z-10 p-8">
                     <div className="mb-8 text-center">
                         <h1 className="text-foreground text-3xl font-semibold">Reset password</h1>

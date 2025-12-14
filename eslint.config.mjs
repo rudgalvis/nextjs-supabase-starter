@@ -58,14 +58,7 @@ export default [
             ...reactPlugin.configs.recommended.rules,
             "react/react-in-jsx-scope": "off", // Not needed in Next.js
             "react/prop-types": "off", // Using TypeScript
-            "react/jsx-props-no-spreading": [
-                "error",
-                {
-                    html: "enforce",
-                    custom: "ignore",
-                    exceptions: ["Component"],
-                },
-            ],
+            "react/jsx-props-no-spreading": "off",
             "react/jsx-filename-extension": [
                 "error",
                 {

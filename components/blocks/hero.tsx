@@ -41,7 +41,7 @@ const HeroContent = ({
             {title} {titleHighlight && <span className="text-primary">{titleHighlight}</span>}
         </motion.h1>
         <motion.p
-            className="text-muted-foreground max-w-[42rem] leading-normal sm:text-xl sm:leading-8"
+            className="text-muted-foreground max-w-2xl leading-normal sm:text-xl sm:leading-8"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1, duration: 0.8, ease }}

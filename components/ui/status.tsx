@@ -17,7 +17,8 @@ export const Status = ({ className, status, ...props }: StatusProps) => (
 export type StatusIndicatorProps = HTMLAttributes<HTMLSpanElement>
 
 export const StatusIndicator = ({ className, ...props }: StatusIndicatorProps) => (
-    <span className="relative flex h-2 w-2" {...props}>
+    <span className={cn("relative flex h-2 w-2", className)} {...props}>
+        {" "}
         <span
             className={cn(
                 "absolute inline-flex h-full w-full animate-ping rounded-full opacity-75",
@@ -43,6 +44,7 @@ export type StatusLabelProps = HTMLAttributes<HTMLSpanElement>
 
 export const StatusLabel = ({ className, children, ...props }: StatusLabelProps) => (
     <span className={cn("text-muted-foreground", className)} {...props}>
+        {" "}
         {children ?? (
             <>
                 <span className="hidden group-[.online]:block">Online</span>

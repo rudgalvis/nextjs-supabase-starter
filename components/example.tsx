@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import { cn } from "@/lib/utils"
 
 const ExampleWrapper = ({ className, ...props }: React.ComponentProps<"div">) => (

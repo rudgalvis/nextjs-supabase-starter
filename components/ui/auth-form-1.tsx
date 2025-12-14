@@ -3,12 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod"
 import { AnimatePresence, motion } from "framer-motion"
 import { ArrowLeft, Eye, EyeOff, Loader2, MailCheck } from "lucide-react"
-import { useCallback, useState } from "react"
 import type { ComponentProps, ReactNode } from "react"
+import { useCallback, useState } from "react"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
 
-import { signIn, signUp, forgotPassword, signInWithOAuth } from "@/app/auth/actions"
+import { forgotPassword, signIn, signInWithOAuth, signUp } from "@/app/auth/actions"
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Input } from "@/components/ui/input"
@@ -78,7 +78,7 @@ const Auth = ({ className }: ComponentProps<"div">) => {
     return (
         <div data-slot="auth" className={cn("mx-auto w-full max-w-md", className)}>
             <div className="border-border/50 bg-card/80 relative overflow-hidden rounded-xl border shadow-xl backdrop-blur-sm">
-                <div className="from-primary/5 to-secondary/5 absolute inset-0 bg-gradient-to-br" />
+                <div className="from-primary/5 to-secondary/5 absolute inset-0 bg-linear-to-br" />
                 <div className="relative z-10">
                     <AnimatePresence mode="wait">
                         {state.view === AuthView.SIGN_IN && (
@@ -727,13 +727,13 @@ const AuthResetSuccess = ({ onSignIn }: AuthResetSuccessProps) => (
 
 export {
     Auth,
+    AuthError,
+    AuthForgotPassword,
+    AuthForm,
+    AuthResetSuccess,
+    AuthSeparator,
     AuthSignIn,
     AuthSignUp,
-    AuthForgotPassword,
-    AuthResetSuccess,
-    AuthForm,
-    AuthError,
-    AuthSuccess,
     AuthSocialButtons,
-    AuthSeparator,
+    AuthSuccess,
 }
