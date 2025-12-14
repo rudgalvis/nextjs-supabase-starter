@@ -33,8 +33,8 @@ import {
 import Image from "next/image"
 import * as React from "react"
 
+import { SupabaseHealthClient } from "@/components/blocks/supabase-health/supabase-health"
 import { Example, ExampleWrapper } from "@/components/example"
-import { SupabaseHealthClient } from "@/components/features/supabase-health/supabase-health-client"
 import {
     AlertDialog,
     AlertDialogAction,

@@ -1,24 +1,45 @@
-import Link from "next/link"
+import { Hero } from "@/components/blocks/hero"
+import { SupabaseHealthClient } from "@/components/blocks/supabase-health/supabase-health"
+import { Icons } from "@/components/ui/icons"
+import { createServerClient } from "@/lib/supabase/server"
 
-import { ComponentExample } from "@/components/component-example"
-import { Button } from "@/components/ui/button"
+const Page = async () => {
+    const supabase = await createServerClient()
+    const {
+        data: { user },
+    } = await supabase.auth.getUser()
 
-const Page = () => (
-    <>
-        <nav className="border-b-border/50 bg-background/95 supports-backdrop-filter:bg-background/60 sticky top-0 z-50 border-b backdrop-blur">
-            <div className="container flex h-14 items-center justify-between px-4">
-                <Link href="/" className="text-foreground font-semibold">
-                    Home
-                </Link>
-                <div className="flex items-center gap-4">
-                    <Link href="/auth">
-                        <Button variant="outline">Auth</Button>
-                    </Link>
-                </div>
-            </div>
-        </nav>
-        <ComponentExample />
-    </>
-)
+    return (
+        <>
+            <Hero
+                pill={{
+                    text: "Supabase status",
+                    icon: (
+                        <SupabaseHealthClient
+                            showLabel={false}
+                            showRefreshButton={false}
+                            showMessage={false}
+                        />
+                    ),
+                }}
+                content={{
+                    title: "Start fast with",
+                    titleHighlight: "Next.js & Supabase & Shadncn",
+                    description:
+                        "A production-ready starter template with authentication, database, and modern UI components. Get started in minutes.",
+                    primaryAction: {
+                        href: user ? "/settings" : "/auth",
+                        text: user ? "Go to Settings" : "Get Started",
+                        icon: <Icons.chevronRight className="h-4 w-4" />,
+                    },
+                    secondaryAction: {
+                        href: "/auth",
+                        text: "Learn More",
+                    },
+                }}
+            />
+        </>
+    )
+}
 
 export default Page

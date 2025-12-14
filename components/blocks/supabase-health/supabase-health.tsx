@@ -29,9 +29,15 @@ function mapHealthStatusToStatus(healthStatus: "healthy" | "unhealthy"): "online
 export const SupabaseHealthClient = ({
     initialData,
     initialError,
+    showLabel = false,
+    showRefreshButton = true,
+    showMessage = true,
 }: {
     initialData?: HealthCheck | null
     initialError?: Error | null
+    showLabel?: boolean
+    showRefreshButton?: boolean
+    showMessage?: boolean
 }) => {
     const [healthData, setHealthData] = useState<HealthCheck | null>(initialData ?? null)
     const [error, setError] = useState<Error | null>(initialError ?? null)
@@ -74,19 +80,25 @@ export const SupabaseHealthClient = ({
         <div className="flex items-center gap-3">
             <Status status={status}>
                 <StatusIndicator />
-                <StatusLabel>{healthData?.status === "healthy" ? "Online" : "Offline"}</StatusLabel>
+                {showLabel && (
+                    <StatusLabel>
+                        {healthData?.status === "healthy" ? "Online" : "Offline"}
+                    </StatusLabel>
+                )}
             </Status>
 
-            <Button
-                variant="outline"
-                size="sm"
-                onClick={handleRefresh}
-                disabled={isPending}
-                aria-label="Refresh health check"
-            >
-                <RefreshCwIcon className={isPending ? "animate-spin" : ""} />
-                Refresh
-            </Button>
+            {showRefreshButton && (
+                <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={handleRefresh}
+                    disabled={isPending}
+                    aria-label="Refresh health check"
+                >
+                    <RefreshCwIcon className={isPending ? "animate-spin" : ""} />
+                    Refresh
+                </Button>
+            )}
 
             {error && (
                 <span className="text-destructive text-sm" role="alert">
@@ -94,7 +106,7 @@ export const SupabaseHealthClient = ({
                 </span>
             )}
 
-            {healthData?.message && !error && (
+            {showMessage && healthData?.message && !error && (
                 <span className="text-muted-foreground text-sm">{healthData.message}</span>
             )}
         </div>

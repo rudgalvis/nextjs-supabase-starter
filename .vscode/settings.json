@@ -2,8 +2,9 @@
 
   "explorer.fileNesting.enabled": true,
   "explorer.fileNesting.patterns": {
-    "package.json": "package-lock.json, components.json, README.md, .prettierrc.json, .prettierignore, eslint.config.mjs, next.config.ts, postcss.config.mjs, tsconfig.json, .gitignore, next-env.d.ts"
-    ".env": ".env.local, .env.example"
+    "package.json": "package-lock.json, components.json, README.md, .prettierrc.json, .prettierignore, eslint.config.mjs, postcss.config.mjs, tsconfig.json, .gitignore",
+    ".env": ".env.local, .env.example",
+    "cfg-next": "middleware.ts, next.config.ts, next-env.d.ts"
   },
   "files.exclude": {
     "**/.DS_Store": true,

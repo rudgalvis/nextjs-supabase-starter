@@ -6,7 +6,7 @@
         "dev": "npm run stop:everything-else && npm run dev:supabase && next dev",
         "dev:next": "next dev",
         "dev:supabase": "supabase start",
-        "dev:st": "supabase status",
+        "refresh:supabase": "supabase stop && supabase start",
         "build": "next build",
         "start": "next start",
         "lint": "eslint",

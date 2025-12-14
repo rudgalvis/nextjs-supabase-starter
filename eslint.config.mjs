@@ -104,7 +104,6 @@ export default [
                 "error",
                 {
                     groups: ["builtin", "external", "internal", "parent", "sibling", "index"],
-                    "newlines-between": "always",
                     alphabetize: { order: "asc", caseInsensitive: true },
                     // React imports are optional and treated as regular external imports
                     // No special ordering requirement since React doesn't need to be imported in modern React
