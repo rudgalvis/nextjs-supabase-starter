@@ -9,6 +9,7 @@ export const GET = async (request: NextRequest) => {
     const code = requestUrl.searchParams.get("code")
     const token = requestUrl.searchParams.get("token")
     const tokenHash = requestUrl.searchParams.get("token_hash")
+    const email = requestUrl.searchParams.get("email")
     const type = requestUrl.searchParams.get("type") as
         | "signup"
         | "email_change"
@@ -63,10 +64,18 @@ export const GET = async (request: NextRequest) => {
                       ? "magiclink"
                       : "email"
 
-        const { error } = await supabase.auth.verifyOtp({
-            ...(tokenHash ? { token_hash: tokenHash } : { token: token! }),
-            type: otpType,
-        })
+        const { error } = await supabase.auth.verifyOtp(
+            tokenHash
+                ? {
+                      token_hash: tokenHash,
+                      type: otpType,
+                  }
+                : ({
+                      token: token!,
+                      type: otpType,
+                      ...(email && { email }),
+                  } as any)
+        )
 
         if (!error) {
             return response

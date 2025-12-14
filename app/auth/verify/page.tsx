@@ -2,10 +2,10 @@
 
 import { Loader2 } from "lucide-react"
 import { useRouter, useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 
-const VerifyEmailPage = () => {
+const VerifyEmailContent = () => {
     const router = useRouter()
     const searchParams = useSearchParams()
     const [status, setStatus] = useState<"verifying" | "success" | "error">("verifying")
@@ -145,5 +145,20 @@ const VerifyEmailPage = () => {
         </div>
     )
 }
+
+const VerifyEmailPage = () => (
+    <Suspense
+        fallback={
+            <div className="flex min-h-screen items-center justify-center">
+                <div className="bg-card mx-auto w-full max-w-md space-y-6 rounded-lg border p-8 text-center shadow-lg">
+                    <Loader2 className="text-primary mx-auto h-12 w-12 animate-spin" />
+                    <h1 className="text-2xl font-semibold">Loading...</h1>
+                </div>
+            </div>
+        }
+    >
+        <VerifyEmailContent />
+    </Suspense>
+)
 
 export default VerifyEmailPage

@@ -14,6 +14,11 @@ import {
 import { Separator } from "@/components/ui/separator"
 import { createServerClient } from "@/lib/supabase/server"
 
+const handleSignOut = async (_formData: FormData) => {
+    "use server"
+    await signOut()
+}
+
 const SettingsPage = async () => {
     const supabase = await createServerClient()
     const {
@@ -43,16 +48,12 @@ const SettingsPage = async () => {
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="space-y-2">
-                            <label className="text-muted-foreground text-sm font-medium">
-                                Email
-                            </label>
+                            <div className="text-muted-foreground text-sm font-medium">Email</div>
                             <p className="text-sm">{user.email}</p>
                         </div>
                         <Separator />
                         <div className="space-y-2">
-                            <label className="text-muted-foreground text-sm font-medium">
-                                User ID
-                            </label>
+                            <div className="text-muted-foreground text-sm font-medium">User ID</div>
                             <p className="text-muted-foreground font-mono text-xs break-all">
                                 {user.id}
                             </p>
@@ -61,18 +62,18 @@ const SettingsPage = async () => {
                             <>
                                 <Separator />
                                 <div className="space-y-2">
-                                    <label className="text-muted-foreground text-sm font-medium">
+                                    <div className="text-muted-foreground text-sm font-medium">
                                         Name
-                                    </label>
+                                    </div>
                                     <p className="text-sm">{user.user_metadata.name}</p>
                                 </div>
                             </>
                         )}
                         <Separator />
                         <div className="space-y-2">
-                            <label className="text-muted-foreground text-sm font-medium">
+                            <div className="text-muted-foreground text-sm font-medium">
                                 Account Created
-                            </label>
+                            </div>
                             <p className="text-sm">
                                 {new Date(user.created_at).toLocaleDateString("en-US", {
                                     year: "numeric",
@@ -83,7 +84,7 @@ const SettingsPage = async () => {
                         </div>
                     </CardContent>
                     <CardFooter className="flex flex-col gap-2 sm:flex-row sm:justify-between">
-                        <form action={signOut}>
+                        <form action={handleSignOut}>
                             <Button type="submit" variant="destructive">
                                 Sign Out
                             </Button>

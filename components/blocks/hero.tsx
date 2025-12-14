@@ -6,7 +6,7 @@ import { buttonVariants } from "@/components/ui/button"
 import HeroBadge from "@/components/ui/hero-badge"
 import { cn } from "@/lib/utils"
 
-const ease = [0.16, 1, 0.3, 1]
+const ease: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 interface HeroContentProps {
     title: string
