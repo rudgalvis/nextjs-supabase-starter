@@ -1,0 +1,41 @@
+{
+  "name": "nextstarter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "npm run stop:everything-else && next dev",
+    "dev:next": "next dev",
+    "dev:supabase": "supabase start",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "stop:everything-else": "./bin/stop-all-docker-containers.sh"
+  },
+  "dependencies": {
+    "@supabase/ssr": "^0.8.0",
+    "@supabase/supabase-js": "^2.87.1",
+    "next": "16.0.10",
+    "react": "19.2.1",
+    "react-dom": "19.2.1"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3.3.3",
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-next": "16.0.10",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "prettier": "^3.7.4",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

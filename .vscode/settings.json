@@ -1,0 +1,16 @@
+{
+
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, README.md, .prettierrc.json, .prettierignore, eslint.config.mjs, next.config.ts, postcss.config.mjs, tsconfig.json, .gitignore, next-env.d.ts"
+  },
+  "files.exclude": {
+    "**/.DS_Store": true,
+    "**/.git": true,
+    "**/.idea": true,
+    "**/.next": true,
+    "**/build": true,
+    "**/dist": true,
+    "**/node_modules": true
+  }
+}
