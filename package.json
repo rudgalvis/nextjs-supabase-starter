@@ -13,7 +13,12 @@
         "format": "prettier --write .",
         "format:check": "prettier --check .",
         "stop:everything-else": "./.bin/stop-all-docker-containers.sh",
-        "types:generate": "supabase gen types typescript --local > lib/supabase/schema.ts"
+        "types:generate": "supabase gen types typescript --local > lib/supabase/schema.ts",
+        "types:generate:remote": "supabase gen types typescript --linked > lib/supabase/schema.ts",
+        "db:diff": "supabase db diff",
+        "db:push": "supabase db push",
+        "db:link": "supabase link",
+        "db:migration:new": "supabase migration new"
     },
     "dependencies": {
         "@base-ui/react": "^1.0.0",

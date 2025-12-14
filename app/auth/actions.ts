@@ -1,9 +1,25 @@
 "use server"
 
 import { revalidatePath } from "next/cache"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
 
 import { createServerActionClient } from "@/lib/supabase/server"
+
+/**
+ * Get the site URL from environment variable or current request origin
+ */
+const getSiteUrl = async () => {
+    if (process.env.NEXT_PUBLIC_SITE_URL) {
+        return process.env.NEXT_PUBLIC_SITE_URL
+    }
+
+    const headersList = await headers()
+    const host = headersList.get("host")
+    const protocol = headersList.get("x-forwarded-proto") || "http"
+
+    return `${protocol}://${host}`
+}
 
 /**
  * Server Action to sign in a user with email and password.
@@ -29,12 +45,13 @@ export const signIn = async (email: string, password: string) => {
  */
 export const signUp = async (email: string, password: string, name?: string) => {
     const supabase = await createServerActionClient()
+    const siteUrl = await getSiteUrl()
 
     const { error } = await supabase.auth.signUp({
         email,
         password,
         options: {
-            emailRedirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000"}/auth/callback`,
+            emailRedirectTo: `${siteUrl}/auth/callback`,
             data: {
                 name: name || email.split("@")[0],
             },
@@ -69,9 +86,10 @@ export const signOut = async () => {
  */
 export const forgotPassword = async (email: string) => {
     const supabase = await createServerActionClient()
+    const siteUrl = await getSiteUrl()
 
     const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000"}/auth/reset-password`,
+        redirectTo: `${siteUrl}/auth/reset-password`,
     })
 
     if (error) {
@@ -105,11 +123,12 @@ export const resetPassword = async (newPassword: string) => {
  */
 export const signInWithOAuth = async (provider: "google" | "github") => {
     const supabase = await createServerActionClient()
+    const siteUrl = await getSiteUrl()
 
     const { data, error } = await supabase.auth.signInWithOAuth({
         provider,
         options: {
-            redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || "http://127.0.0.1:3000"}/auth/callback`,
+            redirectTo: `${siteUrl}/auth/callback`,
         },
     })
 
