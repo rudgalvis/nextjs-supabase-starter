@@ -51,7 +51,7 @@ export const signUp = async (email: string, password: string, name?: string) => 
         email,
         password,
         options: {
-            emailRedirectTo: `${siteUrl}/auth/callback`,
+            emailRedirectTo: `${siteUrl}/auth/verify`,
             data: {
                 name: name || email.split("@")[0],
             },
