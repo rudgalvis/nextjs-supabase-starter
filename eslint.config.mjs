@@ -8,6 +8,7 @@ import importPlugin from "eslint-plugin-import"
 import tseslint from "@typescript-eslint/eslint-plugin"
 import tsParser from "@typescript-eslint/parser"
 import prettierConfig from "eslint-config-prettier"
+import globals from "globals"
 
 export default [
     js.configs.recommended,
@@ -22,9 +23,10 @@ export default [
                 project: "./tsconfig.json",
             },
             globals: {
+                ...globals.browser,
+                ...globals.node,
                 React: "readonly",
                 JSX: "readonly",
-                process: "readonly",
             },
         },
         plugins: {
@@ -60,7 +62,7 @@ export default [
                 "error",
                 {
                     html: "enforce",
-                    custom: "enforce",
+                    custom: "ignore",
                     exceptions: ["Component"],
                 },
             ],

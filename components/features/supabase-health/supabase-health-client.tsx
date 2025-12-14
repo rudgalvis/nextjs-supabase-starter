@@ -6,6 +6,7 @@ import { useEffect, useState, useTransition } from "react"
 import { Button } from "@/components/ui/button"
 import { Status, StatusIndicator, StatusLabel } from "@/components/ui/status"
 import { type HealthCheck } from "@/lib/db/health"
+import { delay } from "@/lib/utils"
 
 import { refreshHealthCheck } from "./supabase-health-actions"
 
@@ -17,6 +18,10 @@ import { refreshHealthCheck } from "./supabase-health-actions"
 function mapHealthStatusToStatus(healthStatus: "healthy" | "unhealthy"): "online" | "offline" {
     return healthStatus === "healthy" ? "online" : "offline"
 }
+
+/**
+ * Delay helper function for 1 second wait
+ */
 
 /**
  * Client Component that displays Supabase health status with refresh capability.
@@ -36,6 +41,9 @@ export const SupabaseHealthClient = ({
         startTransition(async () => {
             setError(null)
             const result = await refreshHealthCheck()
+
+            // Hardcoded 1 second wait before update
+            await delay(1000)
 
             if (result.error) {
                 setError(result.error)

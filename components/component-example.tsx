@@ -94,12 +94,14 @@ import {
     SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
+import { AuthForm } from "./ui/auth-form-1"
 
 export const ComponentExample = () => (
     <ExampleWrapper>
         <SupabaseHealthExample />
         <CardExample />
         <FormExample />
+        <Example title="Supabase Health"></Example>
     </ExampleWrapper>
 )
 
