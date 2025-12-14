@@ -10,8 +10,6 @@ import { createServerActionClient } from "@/lib/supabase/server"
  * Get the site URL from environment variable or current request origin
  */
 const getSiteUrl = async () => {
-    console.warn(process.env.NEXT_PUBLIC_SITE_URL, process.env.VERCEL_URL)
-
     // Check environment variable first
     if (process.env.NEXT_PUBLIC_SITE_URL) {
         return process.env.NEXT_PUBLIC_SITE_URL
