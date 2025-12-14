@@ -15,6 +15,9 @@ fi
 # Stop all running containers
 docker stop $CONTAINERS
 
+# Stop Supabase and output to terminal
+supabase stop 2>&1
+
 if [ $? -eq 0 ]; then
     echo "Successfully stopped all containers."
 else

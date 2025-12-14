@@ -3,15 +3,17 @@
     "version": "0.1.0",
     "private": true,
     "scripts": {
-        "dev": "npm run stop:everything-else && next dev",
+        "dev": "npm run stop:everything-else && npm run dev:supabase && next dev",
         "dev:next": "next dev",
         "dev:supabase": "supabase start",
+        "dev:st": "supabase status",
         "build": "next build",
         "start": "next start",
         "lint": "eslint",
         "format": "prettier --write .",
         "format:check": "prettier --check .",
-        "stop:everything-else": "./bin/stop-all-docker-containers.sh"
+        "stop:everything-else": "./.bin/stop-all-docker-containers.sh",
+        "types:generate": "supabase gen types typescript --local > lib/supabase/schema.ts"
     },
     "dependencies": {
         "@base-ui/react": "^1.0.0",
